@@ -52,5 +52,5 @@ async fn main() {
 
     axum::serve(listener, app)
         .await
-        .expect("🔥 Failure starting the server!");
+        .expect("🔥 Failure starting the app!");
 }
