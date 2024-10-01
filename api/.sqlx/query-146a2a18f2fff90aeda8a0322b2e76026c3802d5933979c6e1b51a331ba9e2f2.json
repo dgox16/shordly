@@ -1,0 +1,53 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "INSERT INTO urls\n                    (original_url, counter_visits)\n                VALUES ($1, $2)\n                RETURNING *",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id_url",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "original_url",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "encoded_id",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "counter_visits",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 4,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 5,
+        "name": "visited_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Varchar",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      true,
+      false,
+      true,
+      true
+    ]
+  },
+  "hash": "146a2a18f2fff90aeda8a0322b2e76026c3802d5933979c6e1b51a331ba9e2f2"
+}

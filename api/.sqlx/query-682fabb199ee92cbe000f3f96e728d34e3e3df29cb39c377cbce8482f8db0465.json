@@ -1,0 +1,53 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "UPDATE urls \n        SET counter_visits = $2,\n            visited_at = NOW()\n        WHERE id_url = $1\n        RETURNING *",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id_url",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "original_url",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "encoded_id",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "counter_visits",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 4,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 5,
+        "name": "visited_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      true,
+      false,
+      true,
+      true
+    ]
+  },
+  "hash": "682fabb199ee92cbe000f3f96e728d34e3e3df29cb39c377cbce8482f8db0465"
+}

@@ -1,0 +1,112 @@
+<main class="flex justify-center mx-7 xl:mx-0">
+    <div class="w-full md:w-recommend text-center mt-24 md:mt-40 lg:mt-48">
+        <h1
+            class="text-oldworld-blue text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black"
+        >
+            Simplify Your Links
+        </h1>
+        <h2
+            class="text-xl sm:text-2xl md:text-2xl lg:text-3xl text-oldworld-subtext1 mt-4"
+        >
+            Make Long URLs Short and Memorable in Seconds
+        </h2>
+        <form class="mt-7 sm:mt-14 grid grid-cols-12 gap-4" id="formUrl">
+            <input
+                class="bg-oldworld-gray3 px-4 py-3 outline-none text-oldworld-fg text-lg sm:text-xl rounded-lg border-2 transition-colors duration-100 border-solid focus:border-oldworld-blue border-oldworld-gray1 col-span-12 md:col-span-8 lg:col-span-9"
+                name="text"
+                placeholder="Enter your long URL..."
+                type="url"
+                required
+            />
+            <button
+                class="px-3 py-3 bg-oldworld-blue rounded-lg text-oldworld-bg text-xl font-medium hover:scale-[102%] hover:bg-oldworld-bright_blue transition col-span-12 md:col-span-4 lg:col-span-3"
+            >
+                Generate new URL
+            </button>
+        </form>
+
+        <div class="flex justify-center mx-7 xl:mx-0">
+            <div
+                id="shortUrlResult"
+                class="text-2xl text-oldworld-subtext1 px-3 md:px-20 w-full md:w-fit bg-oldworld-gray3 rounded-lg py-4 hidden"
+            >
+                <h1 class="text-xl md:text-2xl mb-1">Your short URL is:</h1>
+                <a
+                    id="shortUrlLink"
+                    href=""
+                    rel="noreferrer"
+                    target="_blank"
+                    role="link"
+                    class="text-oldworld-blue font-medium italic hover:underline text-lg md:text-2xl"
+                >
+                </a>
+            </div>
+            <div
+                id="shortUrlError"
+                class="text-2xl text-oldworld-subtext1 px-3 md:px-20 w-full md:w-fit bg-oldworld-gray3 rounded-lg py-4 mt-8 hidden"
+            >
+                <p
+                    class="text-xl mb-2 text-oldworld-red"
+                    id="shortUrlErrorMessage"
+                >
+                </p>
+            </div>
+        </div>
+
+        <script>
+            const isProd = import.meta.env.PROD;
+
+            const api_url = isProd
+                ? "https://sho.up.railway.app/"
+                : "http://localhost:3000/";
+
+            document
+                .getElementById("formUrl")
+                .addEventListener("submit", (e) => handleSubmit(e));
+
+            const handleSubmit = async (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const original_url = formData.get("text");
+                const response = await fetch(api_url + "url/create", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ original_url }),
+                });
+
+                const data = await response.json();
+
+                if (data.status) {
+                    const linkElement = document.getElementById("shortUrlLink");
+                    if (
+                        linkElement &&
+                        linkElement instanceof HTMLAnchorElement
+                    ) {
+                        linkElement.href = api_url + data.data.encoded_id;
+                        linkElement.textContent =
+                            api_url + data.data.encoded_id;
+                    }
+
+                    const resultContainer =
+                        document.getElementById("shortUrlResult");
+                    resultContainer?.classList.remove("hidden");
+                } else {
+                    const errorMessage = document.getElementById(
+                        "shortUrlErrorMessage",
+                    );
+                    errorMessage.textContent = data.message;
+
+                    const errorContainer =
+                        document.getElementById("shortUrlError");
+                    errorContainer.classList.remove("hidden");
+
+                    setTimeout(() => {
+                        errorContainer.classList.add("hidden");
+                    }, 5000);
+                }
+            };
+        </script>
+    </div>
+</main>
