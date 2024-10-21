@@ -4,7 +4,7 @@ export default {
 	theme: {
 		extend: {
 			width: {
-				recommend: "115ch",
+				recommend: "110ch",
 			},
 			colors: {
 				oldworld: {
