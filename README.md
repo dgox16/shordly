@@ -7,7 +7,7 @@ This URL shortener is powered by Rust for the backend and Astro for the frontend
 
 - <b>Easier Sharing:</b> Short URLs are easier to share and remember, especially in messages, emails, or social media.
 - <b>Trackable Links:</b> Shortened URLs can provide tracking data, like how many times a link was clicked.
-- <b>Cleaner Look:</b> A short, neat URLyt looks more professional and less cluttered.
+- <b>Cleaner Look:</b> A short, neat URL looks more professional and less cluttered.
 
 ## Advantages of Using Rust and Astro
 
