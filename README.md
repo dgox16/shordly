@@ -1,7 +1,15 @@
 # Shordly - URL Shortener Blazingly Fast
 This URL shortener is powered by Rust for the backend and Astro for the frontend, delivering an optimized, high-performance solution for converting long, cumbersome URLs into short, manageable links. Combining the speed and security of Rust with the lightweight, user-friendly interface of Astro, it ensures a seamless and reliable experience.
-            
-![3shots_so](https://github.com/user-attachments/assets/e3db5383-c3d5-47cc-96be-5cf954bf012e)
+
+<div align="center">
+    <a 
+        href="https://shordly.up.railway.app/"
+  	target="_blank"
+	rel="noreferrer noopener"
+    > 
+        <img src="https://github.com/user-attachments/assets/e3db5383-c3d5-47cc-96be-5cf954bf012e">
+    </a>
+</div>
 
 ## Why should I use a URL shortener?
 
