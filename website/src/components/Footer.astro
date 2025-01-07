@@ -1,11 +1,14 @@
+---
+const year = new Date().getFullYear();
+---
+
 <div class="flex justify-center mt-6">
     <div class="w-recommend text-center">
         <p class="py-2 text-[12px] sm:text-[14px]">
-            © 2024 Diego Armando Gómez Martínez.{" "}
+            © {year} Diego Armando Gómez Martínez.
             <span class="hidden sm:inline"> | </span>
-            <br aria-hidden={true} class="block sm:hidden" />{" "}
+            <br aria-hidden={true} class="block sm:hidden" />
             Almost all rights reserved.
         </p>
     </div>
 </div>
-
