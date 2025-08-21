@@ -2,9 +2,10 @@ use axum::http::{
     header::{AUTHORIZATION, CONTENT_TYPE},
     Method,
 };
+
 use dotenvy::dotenv;
 use std::sync::Arc;
-use tower_http::cors::CorsLayer;
+use tower_http::cors::{Any, CorsLayer};
 
 use db::connect_db;
 use models::utils_models::AppState;
@@ -34,12 +35,9 @@ async fn main() {
 
     println!("✅ Database connected successfully!");
 
-    let origins = [env_config.frontend_url.parse().unwrap()];
-
     let cors = CorsLayer::new()
-        .allow_origin(origins)
+        .allow_origin(Any)
         .allow_methods([Method::GET, Method::POST])
-        .allow_credentials(true)
         .allow_headers([AUTHORIZATION, CONTENT_TYPE]);
 
     let app = create_router(Arc::new(AppState { db: pool.clone() })).layer(cors);
