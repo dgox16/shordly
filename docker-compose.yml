@@ -1,9 +1,6 @@
 services:
   frontend:
-    build:
-      context: ./frontend
-      args:
-        PUBLIC_API_BASE_URL: ${PUBLIC_API_BASE_URL}
+    image: ghcr.io/dgox16/shordly-frontend:latest
     container_name: shordly-frontend-container
     restart: unless-stopped
     env_file:
@@ -12,9 +9,7 @@ services:
       - "8007:80"
 
   api:
-    build:
-      context: ./api
-      dockerfile: Dockerfile
+    image: ghcr.io/dgox16/shordly-api:latest
     container_name: shordly-api-container
     restart: unless-stopped
     ports:
