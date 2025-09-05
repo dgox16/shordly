@@ -33,6 +33,13 @@ async fn main() {
         .await
         .expect("🔥 Failure in connection with the database!");
 
+    println!("Running database migrations...");
+        sqlx::migrate!()
+            .run(&pool)
+            .await
+            .expect("Failed to run database migrations.");
+    println!("Migrations completed successfully.");
+
     println!("✅ Database connected successfully!");
 
     let cors = CorsLayer::new()

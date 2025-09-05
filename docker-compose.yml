@@ -4,7 +4,6 @@ services:
       context: ./frontend
       args:
         PUBLIC_API_BASE_URL: ${PUBLIC_API_BASE_URL}
-    image: ghcr.io/dgox16/shordly-frontend:latest
     container_name: shordly-frontend-container
     restart: unless-stopped
     env_file:
@@ -16,7 +15,6 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile
-    image: ghcr.io/dgox16/shordly-api:latest
     container_name: shordly-api-container
     restart: unless-stopped
     ports:
@@ -27,7 +25,7 @@ services:
       - ./api/.env.produccion
 
   db:
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     container_name: shordly-db-container
     restart: unless-stopped
     volumes:
