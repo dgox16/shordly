@@ -1,0 +1,50 @@
+services:
+  frontend:
+    container_name: shordly-frontend-dev
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4321:4321"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - PUBLIC_API_BASE_URL=http://localhost:3000/
+
+  api:
+    container_name: shordly-api-dev
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api:/usr/src/app
+      - cargo-cache:/usr/local/cargo/registry
+    env_file:
+      - ./api/.env
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:17-alpine
+    container_name: shordly-db-dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_shordly_dev:/var/lib/postgresql/data
+    env_file:
+      - ./.env.db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  postgres_data_shordly_dev:
+  cargo-cache:
