@@ -13,6 +13,6 @@ use crate::{
 pub fn url_router(app_state: Arc<AppState>) -> Router {
     Router::new()
         .route("/url/create", post(create_short_url_handler))
-        .route("/:encoded_id", get(visit_url_handler))
+        .route("/{encoded_id}", get(visit_url_handler))
         .with_state(app_state)
 }

@@ -44,6 +44,8 @@ pub async fn create_short_url_handler(
             .await
             .map_err(error_db)?;
 
+            let encoded_url = encode_id(new_url.id_url);
+
             let new_url = sqlx::query_as!(
                 UrlModel,
                 "UPDATE urls 
@@ -51,7 +53,7 @@ pub async fn create_short_url_handler(
                 WHERE id_url = $1
                 RETURNING *",
                 new_url.id_url,
-                encode_id(new_url.id_url)
+                encoded_url
             )
             .fetch_one(&data.db)
             .await
